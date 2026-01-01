@@ -305,35 +305,35 @@ pub enum AudioFormat {
     UNKNOWN = sys::audio::SDL_AUDIO_UNKNOWN.0,
 
     /// Unsigned 8-bit samples
-    U8 = sys::audio::SDL_AUDIO_U8.0,
+    U8 = sys::audio::AUDIO_U8.0,
     /// Signed 8-bit samples
-    S8 = sys::audio::SDL_AUDIO_S8.0,
+    S8 = sys::audio::AUDIO_S8.0,
     /// Signed 16-bit samples, little-endian
-    S16LE = sys::audio::SDL_AUDIO_S16LE.0,
+    S16LE = sys::audio::AUDIO_S16LSB.0,
     /// Signed 16-bit samples, big-endian
-    S16BE = sys::audio::SDL_AUDIO_S16BE.0,
+    S16BE = sys::audio::AUDIO_S16MSB.0,
     /// Signed 32-bit samples, little-endian
-    S32LE = sys::audio::SDL_AUDIO_S32LE.0,
+    S32LE = sys::audio::AUDIO_S32LSB.0,
     /// Signed 32-bit samples, big-endian
-    S32BE = sys::audio::SDL_AUDIO_S32BE.0,
+    S32BE = sys::audio::AUDIO_S32MSB.0,
     /// 32-bit floating point samples, little-endian
-    F32LE = sys::audio::SDL_AUDIO_F32LE.0,
+    F32LE = sys::audio::AUDIO_F32LSB.0,
     /// 32-bit floating point samples, big-endian
-    F32BE = sys::audio::SDL_AUDIO_F32BE.0,
+    F32BE = sys::audio::AUDIO_F32MSB.0,
 }
 
 impl AudioFormat {
     fn from_ll(raw: sys::audio::SDL_AudioFormat) -> Option<AudioFormat> {
         match raw {
             sys::audio::SDL_AUDIO_UNKNOWN => Some(AudioFormat::UNKNOWN),
-            sys::audio::SDL_AUDIO_U8 => Some(AudioFormat::U8),
-            sys::audio::SDL_AUDIO_S8 => Some(AudioFormat::S8),
-            sys::audio::SDL_AUDIO_S16LE => Some(AudioFormat::S16LE),
-            sys::audio::SDL_AUDIO_S16BE => Some(AudioFormat::S16BE),
-            sys::audio::SDL_AUDIO_S32LE => Some(AudioFormat::S32LE),
-            sys::audio::SDL_AUDIO_S32BE => Some(AudioFormat::S32BE),
-            sys::audio::SDL_AUDIO_F32LE => Some(AudioFormat::F32LE),
-            sys::audio::SDL_AUDIO_F32BE => Some(AudioFormat::F32BE),
+            sys::audio::AUDIO_U8 => Some(AudioFormat::U8),
+            sys::audio::AUDIO_S8 => Some(AudioFormat::S8),
+            sys::audio::AUDIO_S16LSB => Some(AudioFormat::S16LE),
+            sys::audio::AUDIO_S16MSB => Some(AudioFormat::S16BE),
+            sys::audio::AUDIO_S32LSB => Some(AudioFormat::S32LE),
+            sys::audio::AUDIO_S32MSB => Some(AudioFormat::S32BE),
+            sys::audio::AUDIO_F32LSB => Some(AudioFormat::F32LE),
+            sys::audio::AUDIO_F32MSB => Some(AudioFormat::F32BE),
             _ => None,
         }
     }
@@ -348,14 +348,14 @@ impl From<AudioFormat> for sys::audio::SDL_AudioFormat {
     fn from(format: AudioFormat) -> sys::audio::SDL_AudioFormat {
         match format {
             AudioFormat::UNKNOWN => sys::audio::SDL_AUDIO_UNKNOWN,
-            AudioFormat::U8 => sys::audio::SDL_AUDIO_U8,
-            AudioFormat::S8 => sys::audio::SDL_AUDIO_S8,
-            AudioFormat::S16LE => sys::audio::SDL_AUDIO_S16LE,
-            AudioFormat::S16BE => sys::audio::SDL_AUDIO_S16BE,
-            AudioFormat::S32LE => sys::audio::SDL_AUDIO_S32LE,
-            AudioFormat::S32BE => sys::audio::SDL_AUDIO_S32BE,
-            AudioFormat::F32LE => sys::audio::SDL_AUDIO_F32LE,
-            AudioFormat::F32BE => sys::audio::SDL_AUDIO_F32BE,
+            AudioFormat::U8 => sys::audio::AUDIO_U8,
+            AudioFormat::S8 => sys::audio::AUDIO_S8,
+            AudioFormat::S16LE => sys::audio::AUDIO_S16LSB,
+            AudioFormat::S16BE => sys::audio::AUDIO_S16MSB,
+            AudioFormat::S32LE => sys::audio::AUDIO_S32LSB,
+            AudioFormat::S32BE => sys::audio::AUDIO_S32MSB,
+            AudioFormat::F32LE => sys::audio::AUDIO_F32LSB,
+            AudioFormat::F32BE => sys::audio::AUDIO_F32MSB,
         }
     }
 }
